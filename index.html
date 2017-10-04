@@ -1,0 +1,296 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css"> </head>
+<title>FB Search</title>
+
+
+<body>
+    <div id="hiddenElements"><span id="long"></span><span id="lat"></span></div>
+    <div ng-app="myApp" id="rootDiv">
+        <div class="container-fluid well well-sm cnt row no-gutter" id="header">
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <p id="titleFB">
+                    <nobr>FB Search</nobr>
+                </p>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 inputClass">
+                <form ng-controller="ctrl">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input placeholder="Type something..." ng-model="keyword" id="keyword" type="keyword" class="form-control formItem" /> <span class="input-group-btn" required>
+                        <button class="btn btn-secondary btnS" type="submit" ng-click="requestPHP()"><span class="glyphicon glyphicon-search"></span>&nbsp</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class=" clearDiv col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <button id="clear" class="btn btn-default" type="clear">Clear</button>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+        </div>
+        <div id="TabsTables" class="col-xs-12 col-sm-12 col-md-12 col-lg12">
+            <div id="content_tabs">
+                <ul id="tabsul" class="nav nav-tabs" data-tabs="tabs" role="tablist">
+                    <li class="active"> <a href="#usersContent" data-toggle="tab">Users</a> </li>
+                    <li><a href="#pagesContent" data-toggle="tab">Pages</a> </li>
+                    <li><a href="#eventsContent" data-toggle="tab">Events</a> </li>
+                    <li><a href="#placesContent" data-toggle="tab">Places</a> </li>
+                    <li><a href="#groupsContent" data-toggle="tab">Groups</a> </li>
+                    <li><a href="#favContent" data-toggle="tab">Favorites</a> </li>
+                </ul>
+            </div>
+            <div id="pBar" class="progress">
+                <div id="pBarC" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">20% Complete</span> </div>
+            </div>
+            <div ng-controller="tCtrl" ng-view class="slide" id='tCtrl'>
+                <div id="results" class="tab-content clearfix">
+                    <div class="tab-pane  active" id="usersContent">
+                        <table class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12" id='usertable'>
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in userdata">
+                                <td>{{$index+1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src={{x.picture.data.url}}></td>
+                                <td>{{x.name}}</td>
+                                <td>
+                                    <button class="btn btn-sq starbtn{{x.id}}" ng-click="favorite(x,'users')"><span class="glyphicon {{x.classStar}}" id='favStar'></span></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sq" id="detailsbtn" ng-click="changeView(x,'users')"><span class="glyphicon glyphicon-chevron-right" id='detchev'></span></td>
+                            </tr>
+                        </table>
+                        <div class='row'>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                            <div class="col-sm-6 col-xs-8 col-md-2 col-lg-2" id="pagDiv">
+                                <button ng-click='next(prev_users,"users")' id="prevbtnusers" class="btn btn-default btn-lg">Previous</button>
+                                <button ng-click='next(next_users,"users")' id="nextbtnusers" class="btn btn-default btn-lg">Next</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="pagesContent">
+                        <table id='pagestable' class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in pagesdata">
+                                <td>{{$index+1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src={{x.picture.data.url}}></td>
+                                <td>{{x.name}}</td>
+                                <td>
+                                    <button class="btn btn-sq starbtn{{x.id}}" ng-click="favorite(x,'pages')"><span class="glyphicon {{x.classStar}}" id='favStar'></span></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sq" id="detailsbtn" ng-click="changeView(x,'pages')"><span class="glyphicon glyphicon-chevron-right" id='detchev'></span></td>
+                            </tr>
+                        </table>
+                        <div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                            <div class="col-sm-6 col-xs-8 col-md-2 col-lg-2 " id="pagDiv">
+                                <button ng-click='next(prev_pages,"pages")' id="prevbtnpages" class="btn btn-default btn-lg">Previous</button>
+                                <button ng-click='next(next_pages,"pages")' id="nextbtnpages" class="btn btn-default btn-lg">Next</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="eventsContent">
+                        <table id='eventstable' class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in eventsdata">
+                                <td>{{$index+1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src=x.picture.data.url></td>
+                                <td>{{x.name}}</td>
+                                <td>
+                                    <button class="btn btn-sq starbtn{{x.id}}" ng-click="favorite(x,'events')"><span class="glyphicon {{x.classStar}}" id='favStar'></span></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sq btn-default" id="detailsbtn" ng-click="changeView(x,'events')"><span class="glyphicon glyphicon-chevron-right" id='detchev'></span></td>
+                            </tr>
+                        </table>
+                        <div class='row'>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                            <div class="col-sm-6 col-xs-8 col-md-2 col-lg-2 " id="pagDiv">
+                                <button ng-click='next(prev_events,"events")' id="prevbtnevents" class="btn btn-default btn-lg">Previous</button>
+                                <button ng-click='next(next_events,"events")' id="nextbtnevents" class="btn btn-default btn-lg">Next</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="placesContent">
+                        <table id='placestable' class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in placesdata">
+                                <td>{{$index+1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src={{x.picture.data.url}}></td>
+                                <td>{{x.name}}</td>
+                                <td>
+                                    <button class="btn btn-sq starbtn{{x.id}}" ng-click="favorite(x,'places')"><span class="glyphicon {{x.classStar}}" id='favStar'></span></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sq btn-default" id="detailsbtn" ng-click="changeView(x,'places')"><span class="glyphicon glyphicon-chevron-right" id='detchev'></span></td>
+                            </tr>
+                        </table>
+                        <div class='row'>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                            <div class="col-sm-6 col-xs-8 col-md-2 col-lg-2 " id="pagDiv">
+                                <button ng-click='next(prev_places,"places")' id="prevbtnplaces" class="btn btn-default btn-lg">Previous</button>
+                                <button ng-click='next(next_places,"places")' id="nextbtnplaces" class="btn btn-default btn-lg">Next</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="groupsContent">
+                        <table id='groupstable' class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in groupsdata">
+                                <td>{{$index+1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src={{x.picture.data.url}}></td>
+                                <td>{{x.name}}</td>
+                                <td>
+                                    <button class="btn btn-sq starbtn{{x.id}}" ng-click="favorite(x,'groups')"><span class="glyphicon {{x.classStar}}" id='favStar'></span></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sq btn-default" id="detailsbtn" ng-click="changeView(x,'groups')"><span class="glyphicon glyphicon-chevron-right" id='detchev'></span></td>
+                            </tr>
+                        </table>
+                        <div id="buttons" class='row'>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                            <div class="col-sm-6 col-xs-8 col-md-2 col-lg-2 " id="pagDiv">
+                                <button ng-click='next(prev_groups,"groups")' id="prevbtngroups" class="btn btn-default btn-lg">Previous</button>
+                                <button ng-click='next(next_groups,"groups")' id="nextbtngroups" class="btn btn-default btn-lg">Next</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-2 col-md-5 col-lg-5"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="favContent">
+                        <table id='favtable' class="table table-hover table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <tr>
+                                <th>#</th>
+                                <th>Profile Photo</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr ng-repeat="x in favdata">
+                                <td>{{$index + 1}}</td>
+                                <td><img onclick=imgOpen(this.src) class="img-circle img-responsive" width=40 height=30 ng-src={{x.picture.data.url}}></td>
+                                <td>{{x.name}}</td>
+                                <td>{{x.type}}</td>
+                               
+                                <td><button class="btn btn-sq trashbtn{{x.id}}" ng-click='removefavorite(x.id)'><span class="glyphicon glyphicon-trash" ></span></button></td>
+                                <td><button class="btn btn-sq btn-default" id="detailsbtn" ng-click="changeView(x,x.type)"><span class="glyphicon glyphicon-chevron-right"></span></td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="detDiv">
+                    <div class='row' id="headerdet">
+                        <button ng-click="changeBack()" class="btn btn-default"><span style="color:#3b5998" class="glyphicon glyphicon-chevron-left"><span style="color:#3b5998">Back</span></span>
+                        </button>
+                        <div id="favsharebtn" style="float:right">
+                            <button ng-click="detailsS()" id="space" class="btn btn-sq btn-default"><span id="starbtndetails" class="glyphicon glyphicon-star-empty"></span></button>
+                            <button ng-click="share()" class="btn btn-sq btn-default"><img src="images/facebook_icon.png" height="15px" width="15px"></span></button>
+                        </div>
+                    </div>
+                    <div class='row' id='detcontentdiv'>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="panel panel-default">
+                                <div onclick='hideA()' class="panel-heading">
+                                    <h3 class="panel-title">Albums</h3></div>
+                                <div id='albumbody' class="panel-body">
+                                    <!--Album content-->
+                                    <div id="pBarD1" class="progress">
+                                        <div id="pBarCD" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">20% Complete</span> </div>
+                                    </div>
+                                    <div style="padding:15px" class="panel panel-default" ng-repeat="x in detailsAlbums">
+                                        <div id="albumpanel" class="panel panel-default">
+                                            <div id="aHeader{{$index}}" class="panel-heading" onclick="toggle(this.id)">
+                                                <h3 class="panel-title">{{x.name}}</h3></div>
+                                            <div id="AlbumBody{{$index}}" class="panel-body">
+                                                <div id="picsA{{index}}">
+                                                    <img style="margin-bottom:15px" class="img img-rounded img-responsive" width="100%" ng-src={{x.photos.data[0].picture}} onclick=imgOpen(this.src)>
+                                                    <img style="margin-bottom:15px" class="img img-rounded img-responsive" width="100%" ng-src={{x.photos.data[1].picture}} onclick=imgOpen(this.src)>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id='errmsgA'>
+                                        <h4>No data found.</h4> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="panel panel-default">
+                                <div onclick='hideP()' class="panel-heading">
+                                    <h3 class="panel-title">Posts</h3></div>
+                                <div id="postsbody" class="panel-body">
+                                    <!--Posts content-->
+                                    <div id="pBarD2" class="progress">
+                                        <div id="pBarCD" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">20% Complete</span> </div>
+                                    </div>
+                                    <div class="panel panel-default" ng-repeat="x in detailsPosts">
+                                        <div id="postpanel">
+                                            <div id="pdivh" class="row"><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" id="pdivhimg"><img class="img img-rounded" id="postImg" width="40px" height="40px" ng-src={{detailsPosts.pic}}></div>
+                                               <div id="pdivhtxt" class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> <p id='testtxt'><b>{{detailsPosts.name}}</b>
+                                                   <br><span id="time">{{x.time}}</span></p></div></div>
+                                                <h4>{{x.message}}</h4>
+                                        </div>
+                                    </div>
+                                    <div id='errmsgP'>
+                                        <h4>No data found.</h4> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+<!--script references-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-animate.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/moment.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+#titleFB {
+    color: royalblue;
+    text-align: center;
+    float: left;
+    font-size: 1.5em;
+    margin-left: 0.6em;
+    margin-top: 0.1em;
+    vertical-align: middle;
+}
+
+.cnt {
+    vertical-align: middle;
+    text-align: center;
+    padding-bottom: 0;
+    padding-top: 1em;
+    margin-bottom: 0;
+}
+
+.input-group> span> .btn {
+    background-color: #3b5998;
+    border-radius: 0;
+}
+
+.clearDiv {
+    float: left;
+}
+
+
+.glyphicon-search {
+    color: white;
+    vertical-align: middle;
+}
+#hiddenElements {
+    visibility: hidden;
+}
+
+#pagDiv>button {
+    margin-left:3px;
+    margin-right: 3px;
+}
+#pBar {
+    width: 50%;
+    margin: auto;
+    margin-top: 10em;
+    visibility:hidden;
+    display: none;
+}
+#pBarD1, #pBarD2 {
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    display: none;
+}
+#detcontentdiv{
+margin-top: 10px;
+}
+#space{
+    margin-right:5px;
+}
+div[id*="AlbumBody"] {
+    display: none;
+}
+#time {
+    color: darkgrey;
+}
+#pdivhimg,#pdivhtxt {
+    display: inline;
+}
+
+#pdivhtxt {
+    margin-left:15px;
+}
+
+#headerdet {
+    margin-top: 10px;
+    margin-left:10px;
+    margin-right: 10px;
+}
+#pBar {
+    visibility: hidden;
+}
+#tCtrl {
+    display: none;
+}
+
+#detDiv {
+    display: none;
+}
+#postImg {
+   
+    margin-top:0px;
+}
+#errmsgP,#errmsgA {
+   padding: 10px;
+    padding-left: 20px;
+    display: none;
+    background-color:#f9f7b1;
+    margin: 10px;
+    border-radius: 5px;
+}
+#errmsgP>h4 , #errmsgA>h4{
+    color:brown;
+}
+#favsharebtn {
+    margin-right: 30px;
+    display: none;
+}
+#postpanel {
+    padding:15px;
+      
+}
+#favStar #detchev{
+    margin: auto;
+    align-content: center;
+    text-align: center;
+}
+.glyphicon-star .glyphicon-star-empty .glyphicon-chevron-right{
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+    margin-left:0;
+}
+.btn-sq {
+    background-color: white;
+    border:solid 0.5px grey;
+}
+
+.nav-tabs > li {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: 16.666667%;/*change this to 100 for mobile view*/
+}
+
+#clear {
+    color: #3b5998;
+    background-color: white;
+    border: solid 1px #3b5998;
+}
+
+.glyphicon-star {
+    color: #edea34;
+}
+.btnS {
+    text-align: center;
+    align-content: center;
+}
+
+.nav-tabs .nav {
+    margin: 0;
+    border-radius: 0;
+    text-align: center;
+    align-content: center;
+}
+
+
+.nav-tabs > li > a {
+    border-radius: 0;
+    border: 0px;
+    margin: auto;
+    text-align: center;
+    align-content: center;
+}
+
+
+.nav-tabs > li.active >a,
+.nav-tabs > li.active >a:focus {
+    background-color: #3b5998;
+    color: white;
+}
+
+.slide.ng-enter,
+.slide.ng-leave {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.slide.ng-enter {
+    left: 100%;
+}
+.slide.ng-enter-active {
+    left: 0;
+}
+.slide.ng-leave {
+    left: 0;
+}
+.slide.ng-leave-active {
+    left: -100%;
+}

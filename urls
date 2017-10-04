@@ -1,0 +1,16 @@
+https://graph.facebook.com/v2.8/63811549237?fields=albums.limit(5){name,photos.limit(2){name,
+picture}},posts.limit(5){created_time}&EAAQ7likbczkBANXPrjETeKH7uFbkzpGUXuyLl8M3sndbCQsDTqi7wu7gol0DiKtmIuhFRs4Fe4y7HQZAAl9Dfi16zwLADn2kLhh6o33slstxPgP72X4bT5xAYNAZCfSWHcxQ4FG2zukAFr8NkgA6QLv0xzONQZD
+
+
+
+https://graph.facebook.com/v2.8/10158962866725131/picture?access_token=EAACEdEose0cBAJkqqzWbRPdH5uRhKaymsaNYXHJlgV8EwGUk6EAH0gXTR50T0Qugxr6lJtNQjsJgnbYx7RtX6bDu2OjQuPP9smifKtXXf3tilAWtbRLwd8V7hARzOhP9h8vyT6DCknrpkHBO7SEZBiCmSgYcjiMGnQ5zjcHJwzE7NbYzWvZBDuKJdCZCnwZD"
+
+Sample Request:
+http://cs-server.usc.edu:24924/dc8/index.php?keyword=SpaceX&lat=34.0216685&long=-118.2826306
+
+
+http://lowcost-env.wzpsud4a37.us-west-2.elasticbeanstalk.com/index.php?keyword=SpaceX&lat=34.0216685&long=-118.2826306
+
+
+
+submit -user csci571 -tag hw8 index.php index.html style.css script.js
